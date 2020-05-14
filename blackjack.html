@@ -13,12 +13,17 @@
 
     <h5>Card Totals:</h5>
     <div id='player1CardsTotal'></div>
-    <button onclick='hit()'>hit</button>
-    <button onclick='stand()'>stay</button>
+    <button onclick='cardMethods.hit()'>hit</button>
+    <button onclick='cardMethods.stand()'>stay</button>
+
+    <h5 id='dealerName'>Dealer's Cards</h5>
+    <div id='dealersCards'></div>
 
     <div id='dealer'></div>    
     <div id='dealerFaceCard'></div>
     <div id='dealerCardsTotal'></div>
+
+    <button onclick='newGame'>New Game</button>
 
     <script src='blackjack.js'></script>
 </body>
