@@ -19,6 +19,7 @@ let cardMethods = {
 
         }
         html += '</ul>'
+        console.log(html);
         document.getElementById('player1Cards').innerHTML = html;
         this.totalPlayer1Cards();
     },
@@ -28,7 +29,7 @@ let cardMethods = {
             cards.dealerCards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() ) //still taking it out of array
         }
         let html = '<ul>';
-        for (let i = 0; i < cards.dealerCards.length - 1; i++) {
+        for (let i = 0; i < cards.dealerCards.length; i++) {// -1 after length to show just facecard
             html += `<li>${cards.dealerCards[i]}</li>`;
         }
         html += '</ul>'
@@ -36,11 +37,17 @@ let cardMethods = {
         this.totalDealerCards();
     },
     
-    hit: function() {
-      cards.player1Cards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() ); //works
-      console.log(`Players cards: ${cards.player1Cards}`);
-        // let addedCards = document.getElementById('player1Cards').value;
+    playerHit: function() {
+      cards.player1Cards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() );
+      console.log(`Players hand: ${cards.player1Cards}`);
+       // let addedCards = document.getElementById('player1Cards').value;
         this.totalPlayer1Cards();
+    },
+
+    dealerHit: function() {
+        cards.dealerCards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() );
+        console.log(`Dealers hand: ${cards.dealerCards}`);
+        this.totalDealerCards();
     },
 
     stand: function() {
@@ -50,24 +57,35 @@ let cardMethods = {
         // stop pulling cards dealer wins! start new game
         // else dealerstotalsum >= 17 stop
         //else 
+        document.getElementById('hitBtn').disabled = true;
+        this.dealerHit();
+
     },
 
     totalDealerCards: function () {
-        for (let i = 0; i < cards.dealerCards.length; i++) {
-            cards.dealerCardsTotal += cards.dealerCards[i];
-        }
-        document.getElementById('dealerCardsTotal').innerText = cards.dealerCardsTotal;// hidden because we do not want it to show on screen!
-        console.log(`Dealers Total: ${cards.dealerCardsTotal}`);
+        let dealerCardsSum = cards.dealerCards.reduce((a,b ) => a + b);
+        console.log(`Dealers Total: ${dealerCardsSum}`);
+        // if (dealerCardsSum <= 21 && dealerCardsSum > cards.player1CardsTotal) {
+        //     alert('DEALER WINS! TRY AGAIN');            
+        // } else if (dealerCardsSum > 21 && dealerCardsSum < cards.player1CardsTotal) {
+        //     alert('PLAYER WINS! WOOHOO! PLAY AGAIN!');
+        // }
+        document.getElementById('dealerCardsTotal').innerText = dealerCardsSum;
     },
 
     totalPlayer1Cards: function () {
-        let player1CardsSum = cards.player1Cards.reduce((accumulator, currentValue) => accumulator + currentValue);
+        let player1CardsSum = cards.player1Cards.reduce((a, b) => a + b); //this takes the sum of each array and adds together (accumulator, currentValue)
         console.log(`Players Total: ${player1CardsSum}`);
         // is below needed?
         if (player1CardsSum > 21) {
-            alert('YOU LOST! INSERT MORE MONEY TO PLAY AGAIN!');
+            alert('PLAYER BUST!');
+            this.reload();
         }
         document.getElementById('player1CardsTotal').innerText = player1CardsSum;
+    },
+
+    reload: function () {
+        location.reload();
     }
 }
 
@@ -110,3 +128,11 @@ cardMethods.initalDealerDeal();
     //     }
     //     document.getElementById('player1CardsTotal').innerText = cards.player1CardsTotal;
     // }
+//OG 
+    // totalDealerCards: function () {
+    //     for (let i = 0; i < cards.dealerCards.length; i++) {
+    //         cards.dealerCardsTotal += cards.dealerCards[i];
+    //     }
+    //     document.getElementById('dealerCardsTotal').innerText = cards.dealerCardsTotal;// hidden because we do not want it to show on screen!
+    //     console.log(`Dealers Total: ${cards.dealerCardsTotal}`);
+    // },
