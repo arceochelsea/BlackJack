@@ -89,6 +89,7 @@ let cardMethods = {
     }
 }
 
+
 document.getElementById('title').innerText = "You Lose Casino!";
 cardMethods.initalPlayerDeal();
 cardMethods.initalDealerDeal();
@@ -96,15 +97,6 @@ cardMethods.initalDealerDeal();
 
 //document.getElementById('player1Name').innerText = prompt("What is your name?");
 
-// hit: function() {
-//     let playerHit = 
-//         cards.player1Cards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() )
-
-//     },
-
-//     stand: function () {
-
-//     },
 
 //     updatePlayerCards:function () {
 
