@@ -25,8 +25,8 @@ let cardMethods = {
     },
 
     initalDealerDeal: function() {
-        for (let i = 0; i < 2; i++) { //giving the dealer two cards still
-            cards.dealerCards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() ) //still taking it out of array
+        for (let i = 0; i < 2; i++) { 
+            cards.dealerCards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() ) 
         }
         let html = '<ul>';
         for (let i = 0; i < cards.dealerCards.length; i++) {// -1 after length to show just facecard
@@ -40,7 +40,6 @@ let cardMethods = {
     playerHit: function() {
       cards.player1Cards.push( cards.deck.splice(Math.floor(Math.random() * cards.deck.length), 1).pop() );
       console.log(`Players hand: ${cards.player1Cards}`);
-       // let addedCards = document.getElementById('player1Cards').value;
         this.totalPlayer1Cards();
     },
 
@@ -53,12 +52,11 @@ let cardMethods = {
     stand: function() {
         //when player clicks stay/stand dealer should automatically pull cards
         //reveal bottom card and total to screen
-        //if dealerstotalsum >= 17 stop pulling cards && dealerstotalsum > player1totalsum 
+        //if dealerstotalsum >= 17 stop pulling cards 
         // stop pulling cards dealer wins! start new game
         // else dealerstotalsum >= 17 stop
         //else 
         document.getElementById('hitBtn').disabled = true;
-        this.dealerHit();
 
     },
 
@@ -76,7 +74,7 @@ let cardMethods = {
     totalPlayer1Cards: function () {
         let player1CardsSum = cards.player1Cards.reduce((a, b) => a + b); //this takes the sum of each array and adds together (accumulator, currentValue)
         console.log(`Players Total: ${player1CardsSum}`);
-        // is below needed?
+        // 
         if (player1CardsSum > 21) {
             alert('PLAYER BUST!');
             this.reload();
@@ -86,7 +84,8 @@ let cardMethods = {
 
     reload: function () {
         location.reload();
-    }
+    },
+    
 }
 
 
