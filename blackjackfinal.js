@@ -113,3 +113,5 @@ let cards = {
       };
     //call functions
     cardMethod.initialDeal();
+
+    //find and fix error regarding }
